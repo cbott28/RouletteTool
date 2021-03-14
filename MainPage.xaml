@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Roulete_IRS"
+             x:Class="Roulete_IRS.MainPage">
+
+    <StackLayout>
+        <Label Text="Roulette Tool"
+               x:Name="Title"
+            Margin="20,20,20,20"
+            FontAttributes="Bold"
+            FontSize="Large"
+            HorizontalOptions="Center" />
+
+        <Label Margin="20,20,20,20"
+            FontSize="Medium">
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="Instructions: "
+                          FontAttributes="Bold" />
+                    <Span Text="Enter your starting unit and record the result after each spin. After two different dozens are recorded, your next bet will be calculated and displayed." />
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+
+        <Grid Margin="10,5,10,5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*" />
+                <ColumnDefinition Width="0.5*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+            </Grid.RowDefinitions>
+            <Label Text="Starting Unit"
+                   VerticalTextAlignment="Center"
+                   FontAttributes="Bold"
+                   HorizontalTextAlignment="End"/>
+            <Entry Grid.Column="1"
+                   Placeholder="0.00"
+                   x:Name="StartingUnitTextbox"
+                   WidthRequest="100"
+                   HorizontalOptions="Start"
+                   HorizontalTextAlignment="Center"
+                   Keyboard="Numeric"
+                   TextChanged="StartingUnitEntered" />
+        </Grid>
+
+        <Grid Margin="10,5,40,20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*" />
+                <ColumnDefinition Width="0.5*" />
+                <ColumnDefinition Width="0.5*" />
+                <ColumnDefinition Width="0.5*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+            </Grid.RowDefinitions>
+            <Label Text="Number"
+                   VerticalTextAlignment="Center"
+                   FontAttributes="Bold"
+                   HorizontalTextAlignment="End"/>
+            <Picker Grid.Column="1" 
+                    x:Name="NumberPicker"
+                    Title="0-36"
+                    SelectedIndexChanged="NumberSelected">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>0</x:String>
+                        <x:String>00</x:String>
+                        <x:String>1</x:String>
+                        <x:String>2</x:String>
+                        <x:String>3</x:String>
+                        <x:String>4</x:String>
+                        <x:String>5</x:String>
+                        <x:String>6</x:String>
+                        <x:String>7</x:String>
+                        <x:String>8</x:String>
+                        <x:String>9</x:String>
+                        <x:String>10</x:String>
+                        <x:String>11</x:String>
+                        <x:String>12</x:String>
+                        <x:String>13</x:String>
+                        <x:String>14</x:String>
+                        <x:String>15</x:String>
+                        <x:String>16</x:String>
+                        <x:String>17</x:String>
+                        <x:String>18</x:String>
+                        <x:String>19</x:String>
+                        <x:String>20</x:String>
+                        <x:String>21</x:String>
+                        <x:String>22</x:String>
+                        <x:String>23</x:String>
+                        <x:String>24</x:String>
+                        <x:String>25</x:String>
+                        <x:String>26</x:String>
+                        <x:String>27</x:String>
+                        <x:String>28</x:String>
+                        <x:String>29</x:String>
+                        <x:String>30</x:String>
+                        <x:String>31</x:String>
+                        <x:String>32</x:String>
+                        <x:String>33</x:String>
+                        <x:String>34</x:String>
+                        <x:String>35</x:String>
+                        <x:String>36</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+            <Label Grid.Column="2"
+                   Text="Result"
+                   VerticalTextAlignment="Center"
+                   FontAttributes="Bold"
+                   HorizontalTextAlignment="End"/>
+            <Picker Grid.Column="3" 
+                    x:Name="ResultPicker"
+                    Title="W or L"
+                    SelectedIndexChanged="ResultSelected">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>W</x:String>
+                        <x:String>L</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+        </Grid>
+
+        <Button Text="Submit"
+                x:Name="SubmitBtn"
+                BackgroundColor="LawnGreen"
+                WidthRequest="150"
+                CornerRadius="5"
+                HorizontalOptions="Center"
+                Clicked="SubmitBtnClicked" />
+
+        <Grid Margin="20,5,20,5"
+              x:Name="SessionInfoGrid">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="0.5*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+            </Grid.RowDefinitions>
+            <Label Text="Session Spin Number:"
+                   VerticalTextAlignment="Center"
+                   FontAttributes="Bold"
+                   HorizontalTextAlignment="End"/>
+            <Label Grid.Column="1"
+                   x:Name="SpinNumberLabel"
+                   Text="0"
+                   VerticalTextAlignment="Center"
+                   HorizontalTextAlignment="Start"/>
+            <Label Grid.Column="2"
+                   Text="Bankroll:"
+                   VerticalTextAlignment="Center"
+                   FontAttributes="Bold"
+                   HorizontalTextAlignment="End"/>
+            <Label Grid.Column="3"
+                   x:Name="BankrollLabel"
+                   Text="$0.00"
+                   VerticalTextAlignment="Center"
+                   HorizontalTextAlignment="Start"/>
+        </Grid>
+
+        <Label Text="Next Bet" 
+               x:Name="NextBetLabel"
+            Margin="20,5,20,20"
+            FontAttributes="Bold"
+            FontSize="Large"
+            HorizontalOptions="Center" />
+
+        <Grid Margin="20,5,20,5"
+              x:Name="DozenGrid">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*" />
+                <ColumnDefinition Width="0.5*" />
+                <ColumnDefinition Width="0.5*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="100" />
+            </Grid.RowDefinitions>
+            <Label Text="Dozen 1"
+                   FontAttributes="Bold"
+                   HorizontalTextAlignment="Center"/>
+            <Label Grid.Column="1"
+                   Text="Dozen 2"
+                   FontAttributes="Bold"
+                   HorizontalTextAlignment="Center"/>
+            <Label Grid.Column="2"
+                   Text="Dozen 3"
+                   FontAttributes="Bold"
+                   HorizontalTextAlignment="Center"/>
+            <Label Grid.Row="1"
+                   Grid.Column="0"
+                   x:Name="Dozen1Amount"
+                   FontSize="Large"
+                   Text=""
+                   FontAttributes="Bold"
+                   HorizontalTextAlignment="Center"/>
+            <Label Grid.Row="1"
+                   Grid.Column="1"
+                   x:Name="Dozen2Amount"
+                   FontSize="Large"
+                   Text=""
+                   FontAttributes="Bold"
+                   HorizontalTextAlignment="Center"/>
+            <Label Grid.Row="1"
+                   Grid.Column="2"
+                   x:Name="Dozen3Amount"
+                   FontSize="Large"
+                   Text=""
+                   FontAttributes="Bold"
+                   HorizontalTextAlignment="Center"/>
+        </Grid>
+    </StackLayout>
+
+</ContentPage>
